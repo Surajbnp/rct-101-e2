@@ -1,37 +1,74 @@
 import React from "react";
+import { Button } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+import RadioExample from "./Radio"
+import "./styles.css";
 
-const AddProduct = () => {
-  // TODO: Remove below const and instead import them from chakra
-  const Button = () => <div />;
-  const Modal = () => <div />;
-  const ModalBody = () => <div />;
-  const Input = () => <div />;
-  const Select = () => <div />;
-  const RadioGroup = () => <div />;
-  const Radio = () => <div />;
+
+
+
+function InitialFocus() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const initialRef = React.useRef()
+  const finalRef = React.useRef()
 
   return (
     <>
-      <Button my={4} data-cy="add-product-button"></Button>
-      <Modal>
-        <ModalBody pb={6}>
-          <Input data-cy="add-product-title" />
-          <Select data-cy="add-product-category">
-            <option data-cy="add-product-category-shirt"></option>
-            <option data-cy="add-product-category-pant"></option>
-            <option data-cy="add-product-category-jeans"></option>
-          </Select>
-          <RadioGroup data-cy="add-product-gender">
-            <Radio data-cy="add-product-gender-male"></Radio>
-            <Radio data-cy="add-product-gender-female"></Radio>
-            <Radio data-cy="add-product-gender-unisex"></Radio>
-          </RadioGroup>
-          <Input data-cy="add-product-price" />
-          <Button data-cy="add-product-submit-button"></Button>
-        </ModalBody>
+      <Button onClick={onOpen}>Add New Product</Button>
+
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add New Product</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={4}>
+            <form className="form">
+              <label>Title</label>
+              <br></br>
+              <input type="text" />
+              <br></br>
+              <label>Catagory</label>
+              <br></br>
+              <select >
+              <option value="shirt"></option>
+                <option value="shirt">Shirt</option>
+                <option value="pant">Pant</option>
+                <option value="t-shirt">T-shirt</option>
+              </select>
+              <br></br>
+               <RadioExample  />
+               <br></br>
+               <label>Price</label>
+              <br></br>
+              <input type="number" />
+            </form>
+            
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='teal' mr={0}>
+              Create
+            </Button>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default AddProduct;
+export default InitialFocus;

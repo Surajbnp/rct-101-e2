@@ -1,0 +1,33 @@
+.prod{
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+.prod > button{
+    margin-top: 20px;
+}
+.pagin{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+.pagin > button{
+    margin: 10px;
+}
+.form > input{
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.radio{
+    margin-top: 20px;
+}
+
+.form > select{
+    width: 80%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-top: 5px;
+}

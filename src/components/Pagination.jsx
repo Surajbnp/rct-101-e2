@@ -1,23 +1,36 @@
 import React from "react";
+import "./styles.css";
 
+import { Button } from '@chakra-ui/react'
 const Pagination = () => {
-  // TODO: Remove below const and instead import them from chakra
-  const Button = () => <div />;
-  const ButtonGroup = () => <div />;
-  const Select = () => <div />;
+
+  const [page, setPage] = useState(1);
+  // const [total, setTotal] = useState(0)
+  const [todos, setTodos] = useState([]);
+
+
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/todos?_page=${page}&_limit=${5}`)
+      .then((res) => {
+        setTodos(res.data);
+        setTotal(res.headers["x-total-count"])
+      });
+  }, [page]);
 
   return (
-    <ButtonGroup>
-      <Button data-cy="pagination-first-button"></Button>
-      <Button data-cy="pagination-previous-button"></Button>
-      <Select data-cy="pagination-limit-select">
-        <option data-cy="pagination-limit-3"></option>
-        <option data-cy="pagination-limit-6"></option>
-        <option data-cy="pagination-limit-9"></option>
-      </Select>
-      <Button data-cy="pagination-next-button"></Button>
-      <Button data-cy="pagination-last-button"></Button>
-    </ButtonGroup>
+    <div className="pagin">
+         <Button colorScheme='grey' variant='link'>First</Button>
+         <Button colorScheme='grey' variant='link'>Previous</Button>
+         <select >
+          <option >3</option>
+          <option >6</option>
+          <option >9</option>
+          </select>
+          <Button colorScheme='grey' variant='link'>Next</Button>
+          <Button colorScheme='grey' variant='link'>Last</Button>
+      </div>
   );
 };
 
